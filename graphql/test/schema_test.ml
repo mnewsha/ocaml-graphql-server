@@ -15,7 +15,7 @@ let suite = [
   );
   ("select operation (no operations)", `Quick, fun () ->
     let query = "fragment x on y { z }" in
-    test_query Test_schema.schema () query "{\"errors\":[{\"message\":\"No operation found\"}]}"
+    test_query Test_schema.schema () query "{\"data\":null,\"errors\":[{\"message\":\"No operation found\"}]}"
   );
   ("select operation (one operation, no operation name)", `Quick, fun () ->
     let query = "a { a: __typename }" in
@@ -27,11 +27,11 @@ let suite = [
   );
   ("select operation (one operation, missing operation name)", `Quick, fun () ->
     let query = "a { a: __typename }" in
-    test_query Test_schema.schema () query ~operation_name:"b" "{\"errors\":[{\"message\":\"Operation not found\"}]}"
+    test_query Test_schema.schema () query ~operation_name:"b" "{\"data\":null,\"errors\":[{\"message\":\"Operation not found\"}]}"
   );
   ("select operation (multiple operations, no operation name)", `Quick, fun () ->
     let query = "a { a: __typename } b { b: __typename }" in
-    test_query Test_schema.schema () query "{\"errors\":[{\"message\":\"Operation name required\"}]}"
+    test_query Test_schema.schema () query "{\"data\":null,\"errors\":[{\"message\":\"Operation name required\"}]}"
   );
   ("select operation (multiple operations, matching operation name)", `Quick, fun () ->
     let query = "a { a: __typename } b { b: __typename }" in
@@ -39,6 +39,6 @@ let suite = [
   );
   ("select operation (multiple operations, missing operation name)", `Quick, fun () ->
     let query = "a { a: __typename } b { b: __typename }" in
-    test_query Test_schema.schema () query ~operation_name:"c" "{\"errors\":[{\"message\":\"Operation not found\"}]}"
+    test_query Test_schema.schema () query ~operation_name:"c" "{\"data\":null,\"errors\":[{\"message\":\"Operation not found\"}]}"
   );
 ]

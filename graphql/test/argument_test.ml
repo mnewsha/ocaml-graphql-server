@@ -26,13 +26,13 @@ let suite : (string * [>`Quick] * (unit -> unit)) list = [
     test_query "{ string(x: null) }" "{\"data\":{\"string\":null}}"
   );
   ("null for required argument", `Quick, fun () ->
-    test_query "{ input_obj(x: null) }" "{\"errors\":[{\"message\":\"Missing required argument\"}]}"
+    test_query "{ input_obj(x: null) }" "{\"data\":null,\"errors\":[{\"message\":\"Missing required argument\"}]}"
   );
   ("missing optional argument", `Quick, fun () ->
     test_query "{ string }" "{\"data\":{\"string\":null}}"
   );
   ("missing required argument", `Quick, fun () ->
-    test_query "{ input_obj }" "{\"errors\":[{\"message\":\"Missing required argument\"}]}"
+    test_query "{ input_obj }" "{\"data\":null,\"errors\":[{\"message\":\"Missing required argument\"}]}"
   );
   ("input coercion: single value to list", `Quick, fun () ->
     test_query "{ bool_list(x: false) }" "{\"data\":{\"bool_list\":[false]}}"

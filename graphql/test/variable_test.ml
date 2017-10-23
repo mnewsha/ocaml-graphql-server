@@ -31,7 +31,7 @@ let suite : (string * [>`Quick] * (unit -> unit)) list = [
     test_query ["x", `Null]"{ string(x: $x) }" "{\"data\":{\"string\":null}}"
   );
   ("null for required variable", `Quick, fun () ->
-    test_query ["x", `Null] "{ input_obj(x: $x) }" "{\"errors\":[{\"message\":\"Missing required argument\"}]}"
+    test_query ["x", `Null] "{ input_obj(x: $x) }" "{\"data\":null,\"errors\":[{\"message\":\"Missing required argument\"}]}"
   );
   ("variable coercion: single value to list", `Quick, fun () ->
     test_query ["x", `Bool false] "{ bool_list(x: $x) }" "{\"data\":{\"bool_list\":[false]}}"
